@@ -114,13 +114,14 @@ class Connection(object):
 	def raw_post(self, uri, headers=None, data=None):
 		headers['User-Agent'] = self.__user_agent
 
-		response=loads(self.__SESSION.post(
+		raw_response = self.__SESSION.post(
 			uri,
 			headers=headers,
 			data=data,
 			#params={'_verbosity': '1'},
-			header_auth=True).content)
-
+			header_auth=True)
+		response=loads(raw_response.content)
+		print("called URI {}, response: {}, reason: {}, raw: {}".format(uri, response, raw_response.reason, raw_response))
 		return response
 
 	def delete(self, uri):

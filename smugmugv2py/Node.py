@@ -68,7 +68,9 @@ class Node(object):
 		return Node(response["Response"]["Node"])
 
 	def create_child_album(self, connection, name, url, privacy, description=None):
+		print("creating node, conn: {}, privacy: {}".format(connection,privacy))
 		response = self.__create_child_node(connection, 'Album', name, url, privacy, description)
+		print(response)
 
 		if not "Node" in response["Response"]:
 			pprint(response)
